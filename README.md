@@ -40,9 +40,10 @@ The tests are powered by `pytest`. Test configuration can be found in `pytest.in
   pytest -m smoke
   ```
 
-- **Run tests and generate an HTML report:**
-  ```bash
-  pytest --html=reports/report.html
+- **Access log and reports:**
+  ```
+  reports/report.html
+  logs/automation.log
   ```
 
 ## Latest Test Result
