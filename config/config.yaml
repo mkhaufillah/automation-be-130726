@@ -1,0 +1,33 @@
+# =============================================================================
+# Global Configuration
+# =============================================================================
+
+# -------------------------------
+# Reporting
+# -------------------------------
+reporting:
+  enabled: true
+  output_dir: reports/
+  format: html # html | json | junit
+
+# -------------------------------
+# Logging
+# -------------------------------
+logging:
+  level: INFO # DEBUG | INFO | WARNING | ERROR
+  file: logs/automation.log
+  format: "{time:YYYY-MM-DD HH:mm:ss} | {level} | {name}:{function}:{line} | {message}"
+
+# -------------------------------
+# Binance API
+# -------------------------------
+binance:
+  rest_url_live: https://api.binance.com
+  rest_url_demo: https://demo-api.binance.com
+  rest_url_testnet: https://testnet.binance.vision
+  stream_url_live: wss://stream.binance.com
+  stream_url_demo: wss://demo-stream.binance.com
+  stream_url_testnet: wss://stream.testnet.binance.vision
+  ws_url_live: wss://ws-api.binance.com
+  ws_url_demo: wss://demo-ws-api.binance.com
+  ws_url_testnet: wss://ws-api.testnet.binance.vision

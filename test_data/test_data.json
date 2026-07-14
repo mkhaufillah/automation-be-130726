@@ -1,0 +1,209 @@
+{
+    "TC-REST-01-01": {
+        "request": {
+            "symbol": "BTCUSDT"
+        },
+        "assertion": {
+            "status_code": "200",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "lastUpdateId": {
+                        "type": "integer"
+                    },
+                    "bids": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "prefixItems": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    },
+                    "asks": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "prefixItems": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "required": [
+                    "lastUpdateId",
+                    "bids",
+                    "asks"
+                ]
+            }
+        }
+    },
+    "TC-REST-01-02": {
+        "request": {
+            "symbol": "BTCUSDT"
+        },
+        "assertion": {
+            "status_code": "200",
+            "schema": {}
+        }
+    },
+    "TC-REST-01-03": {
+        "request": {
+            "symbol": "INVALIDSYMBOL"
+        },
+        "assertion": {
+            "status_code": "400, 401",
+            "schema": {}
+        }
+    },
+    "TC-REST-02-01": {
+        "request": {
+            "symbol": "BTCUSDT"
+        },
+        "assertion": {
+            "status_code": "200",
+            "schema": {}
+        }
+    },
+    "TC-REST-02-02": {
+        "request": {
+            "symbol": "BTCUSDT"
+        },
+        "assertion": {
+            "status_code": "200",
+            "schema": {}
+        }
+    },
+    "TC-REST-02-03": {
+        "request": {
+            "symbol": "BTCUSDT"
+        },
+        "assertion": {
+            "status_code": "400, 401",
+            "schema": {}
+        }
+    },
+    "TC-REST-02-04": {
+        "request": {
+            "symbol": "BTCUSDT"
+        },
+        "assertion": {
+            "status_code": "400",
+            "schema": {}
+        }
+    },
+    "TC-REST-03-01": {
+        "request": {
+            "symbol": "BTCUSDT"
+        },
+        "assertion": {
+            "status_code": "200",
+            "schema": {}
+        }
+    },
+    "TC-REST-03-02": {
+        "request": {},
+        "assertion": {
+            "status_code": "200",
+            "schema": {}
+        }
+    },
+    "TC-REST-03-03": {
+        "request": {
+            "symbol": "BTC_USDT"
+        },
+        "assertion": {
+            "status_code": "400",
+            "schema": {}
+        }
+    },
+    "TC-REST-04-01": {
+        "request": {
+            "symbol": "BTCUSDT"
+        },
+        "assertion": {
+            "status_code": "200",
+            "schema": {}
+        }
+    },
+    "TC-REST-04-02": {
+        "request": {
+            "symbol": "BTCUSDT"
+        },
+        "assertion": {
+            "status_code": "200",
+            "schema": {}
+        }
+    },
+    "TC-REST-04-03": {
+        "request": {},
+        "assertion": {
+            "status_code": "400",
+            "schema": {}
+        }
+    },
+    "TC-REST-05-01": {
+        "request": {},
+        "assertion": {
+            "status_code": "200",
+            "schema": {}
+        }
+    },
+    "TC-REST-05-02": {
+        "request": {},
+        "assertion": {
+            "status_code": "401",
+            "schema": {}
+        }
+    },
+    "TC-STREAM-01-01": {
+        "request": {
+            "symbol": "BTCUSDT"
+        },
+        "assertion": {}
+    },
+    "TC-STREAM-01-02": {
+        "request": {
+            "symbol": "BTCUSDT"
+        },
+        "assertion": {}
+    },
+    "TC-STREAM-02-01": {
+        "request": {
+            "symbol": "BTCUSDT"
+        },
+        "assertion": {}
+    },
+    "TC-STREAM-02-02": {
+        "request": {
+            "symbol": "BTCUSDT"
+        },
+        "assertion": {}
+    },
+    "TC-WS-01-01": {
+        "request": {},
+        "assertion": {}
+    },
+    "TC-WS-01-02": {
+        "request": {
+            "symbol": "BTCUSDT"
+        },
+        "assertion": {}
+    },
+    "TC-WS-01-03": {
+        "request": {
+            "symbol": "BTCUSDT"
+        },
+        "assertion": {}
+    }
+}
