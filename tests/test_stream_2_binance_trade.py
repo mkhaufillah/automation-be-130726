@@ -28,13 +28,9 @@ class TestWebSocketStreams:
     async def test_subscribe_trade_stream(self, binance_stream_client: BinanceStreamClient, test_data_based_id: dict):
         data_request = test_data_based_id.get("request", {})
 
-        url = binance_stream_client.get_url_trade(
-            data_request.get("symbol"))
-
-        async with websockets.connect(url) as websocket:
+        async with binance_stream_client.connect_trade(data_request.get("symbol")) as stream:
             # wait up to 30s for a trade
-            response = await asyncio.wait_for(websocket.recv(), timeout=30.0)
-            data = json.loads(response)
+            data = await stream.recv_json(timeout=30.0)
 
             logger.info(f"data test_subscribe_trade_stream: {data}")
 
@@ -45,15 +41,11 @@ class TestWebSocketStreams:
     async def test_trade_event_payload_schema(self, binance_stream_client: BinanceStreamClient, test_data_based_id: dict):
         data_request = test_data_based_id.get("request", {})
 
-        url = binance_stream_client.get_url_trade(
-            data_request.get("symbol"))
-
         # Short delay to prevent connection reset from proxy/rate limits
         await asyncio.sleep(1)
-        async with websockets.connect(url) as websocket:
+        async with binance_stream_client.connect_trade(data_request.get("symbol")) as stream:
             # wait up to 30s for a trade
-            response = await asyncio.wait_for(websocket.recv(), timeout=30.0)
-            data = json.loads(response)
+            data = await stream.recv_json(timeout=30.0)
 
             logger.info(f"data test_trade_event_payload_schema: {data}")
 

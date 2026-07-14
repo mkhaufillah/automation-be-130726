@@ -56,3 +56,18 @@ class BinanceWsClient(BaseBinanceWsClient):
 
     def simulate_cancel_order(self, symbol: str, order_id: str) -> Response:
         return self.binance_rest_client.cancel_order(symbol, order_id)
+
+    async def logon(self, request_id: str = "") -> dict:
+        payload = self.get_logon_payload(request_id)
+        await self.send_payload(payload)
+        return await self.recv_json()
+
+    async def subscribe_user_data(self, request_id: str = "") -> dict:
+        payload = self.get_subscribe_user_data_payload(request_id)
+        await self.send_payload(payload)
+        return await self.recv_json()
+
+    async def unsubscribe_user_data(self, request_id: str = "") -> dict:
+        payload = self.get_unsubscribe_user_data_payload(request_id)
+        await self.send_payload(payload)
+        return await self.recv_json()

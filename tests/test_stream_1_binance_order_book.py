@@ -28,13 +28,9 @@ class TestWebSocketStreams:
     async def test_subscribe_order_book_stream(self, binance_stream_client: BinanceStreamClient, test_data_based_id: dict):
         data_request = test_data_based_id.get("request", {})
 
-        url = binance_stream_client.get_url_orderbook(
-            data_request.get("symbol"))
-
-        async with websockets.connect(url) as websocket:
+        async with binance_stream_client.connect_orderbook(data_request.get("symbol")) as stream:
             # Wait for 1 message
-            response = await asyncio.wait_for(websocket.recv(), timeout=5.0)
-            data = json.loads(response)
+            data = await stream.recv_json(timeout=5.0)
 
             logger.info(f"data test_subscribe_order_book_stream: {data}")
 
@@ -52,14 +48,10 @@ class TestWebSocketStreams:
     async def test_order_book_stream_continuity(self, binance_stream_client: BinanceStreamClient, test_data_based_id: dict):
         data_request = test_data_based_id.get("request", {})
 
-        url = binance_stream_client.get_url_orderbook(
-            data_request.get("symbol"))
-
         messages = []
-        async with websockets.connect(url) as websocket:
+        async with binance_stream_client.connect_orderbook(data_request.get("symbol")) as stream:
             for _ in range(3):
-                response = await asyncio.wait_for(websocket.recv(), timeout=5.0)
-                messages.append(json.loads(response))
+                messages.append(await stream.recv_json(timeout=5.0))
 
         assert len(messages) == 3
 

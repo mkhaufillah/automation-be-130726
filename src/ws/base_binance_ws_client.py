@@ -2,6 +2,9 @@
 Base class for Binance WS API client.
 """
 
+import asyncio
+import json
+import websockets
 import hmac
 import hashlib
 import time
@@ -94,3 +97,30 @@ class BaseBinanceWsClient:
     def get_ws_url(self) -> str:
         """Returns the WebSocket URL."""
         return self.base_url
+
+    async def connect(self):
+        url = self.get_ws_url()
+        self.websocket = await websockets.connect(url)
+        return self
+
+    async def disconnect(self):
+        if hasattr(self, 'websocket') and self.websocket:
+            await self.websocket.close()
+
+    async def __aenter__(self):
+        return await self.connect()
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        await self.disconnect()
+
+    async def send_payload(self, payload: str):
+        if not hasattr(self, 'websocket') or not self.websocket:
+            raise RuntimeError("WebSocket is not connected")
+        await self.websocket.send(payload)
+
+    async def recv_json(self, timeout=5.0) -> dict:
+        if not hasattr(self, 'websocket') or not self.websocket:
+            raise RuntimeError("WebSocket is not connected")
+        response_str = await asyncio.wait_for(self.websocket.recv(), timeout=timeout)
+        return json.loads(response_str)
+

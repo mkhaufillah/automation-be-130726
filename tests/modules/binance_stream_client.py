@@ -2,7 +2,7 @@
 Module class for Binance Stream API client.
 """
 
-from src import get_logger, BaseBinanceStreamClient
+from src import get_logger, BaseBinanceStreamClient, StreamConnection
 
 logger = get_logger(__name__)
 
@@ -28,3 +28,9 @@ class BinanceStreamClient(BaseBinanceStreamClient):
         url = f"{self.base_url}{self.path}/{symbol_lower}@trade"
         logger.info(f"url get_url_trade {url}")
         return url
+
+    def connect_orderbook(self, symbol: str):
+        return StreamConnection(self.get_url_orderbook(symbol))
+
+    def connect_trade(self, symbol: str):
+        return StreamConnection(self.get_url_trade(symbol))

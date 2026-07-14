@@ -8,7 +8,7 @@ from src.core.exceptions import AutomationException, ConfigException, TimeoutExc
 from src.core.test_data import TestData
 from src.utils.logger import get_logger, setup_logging
 from src.rest.base_binance_rest_client import BaseBinanceRestClient
-from src.stream.base_binance_stream_client import BaseBinanceStreamClient
+from src.stream.base_binance_stream_client import BaseBinanceStreamClient, StreamConnection
 from src.ws.base_binance_ws_client import BaseBinanceWsClient
 from src.utils.schema import validate_schema
 
@@ -24,7 +24,8 @@ __all__ = [
     "DEFAULT_TIMEOUT_MS",
     "BaseBinanceRestClient",
     "BaseBinanceStreamClient",
+    "StreamConnection",
+    "BaseBinanceWsClient",
     "TestData",
-    "validate_schema",
-    "BaseBinanceWsClient"
+    "validate_schema"
 ]
