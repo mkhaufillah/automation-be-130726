@@ -16,7 +16,7 @@
    ```
 
 3. **Environment Setup:**
-   - Copy `.env.example` to `.env` and configure your API credentials and other settings.
+   Copy `.env.example` to `.env` and configure your API credentials and other settings.
    ```bash
    cp .env.example .env
    ```
