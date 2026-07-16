@@ -51,7 +51,7 @@ class TestWebSocketStreams:
         messages = []
         async with binance_stream_client.connect_orderbook(data_request.get("symbol")) as stream:
             for _ in range(3):
-                messages.append(await stream.recv_json(timeout=5.0))
+                messages.append(await stream.recv_json(timeout=30))
 
         assert len(messages) == 3
 
